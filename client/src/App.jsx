@@ -6,16 +6,15 @@ function App() {
   const [leads, setLeads] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/leads')
-    // .then(response => console.log(response.data))
+    axios.get('http://localhost:3001/api/leads')
     .then(response => setLeads(response.data))
     .catch(err => console.error(err));
   }, []);
 
   // useEffect(() => {
-  //   fetch('http://localhost:3000/api/posts')
+  //   fetch('http://localhost:3000/api/leads')
   //     .then(response => response.json())
-  //     .then(data => setPosts(data))
+  //     .then(data => setLeads(data))
   //     .catch(err => console.error(err));
   // }, []);
 
