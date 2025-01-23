@@ -1,16 +1,24 @@
 import React, { useState } from 'react'
 import '../assets/css/leadList.css'
+import { useNavigate } from "react-router-dom";
 
-const LeadList = ({leads}) => {
-    // const [leads, setLeads] = useState([])
+const LeadList = ({ leads }) => {
+  const navigate = useNavigate();
 
+  const handleLeadClick = (leadId) => {
+    navigate(`/leads/${leadId}`); 
+  };
     return (
-        <div>
-            <h1>New Leads</h1>
+        <div className='leadListMainContainer'>
+            <h2>New Leads</h2>
                 {leads.map(lead => (
-                    <div className='leadsListContainer'>
+                    <div 
+                        key={lead.leads_id}
+                        className='leadsListContainer' 
+                        onClick={() => handleLeadClick(lead.leads_id)}
+                        >
                         <div className='left'>
-                            <p key={lead.id}>{lead.fname}</p>
+                            <p>{lead.fname}</p>
                             <p>{lead.phone}</p>
                             <p>{lead.email}</p>
                             <p>{lead.company}</p>
@@ -27,8 +35,13 @@ const LeadList = ({leads}) => {
                             <p>{lead.lead_sources}</p>
                         </div>
                         <div className='end'>
-                            <select className='actionDropdown' name="action">
+                            <select 
+                                className='actionDropdown' 
+                                name="action"
+                                onClick={(e) => e.stopPropagation()}
+                                >
                                 <option value="">Action</option>
+                                <option value="">Convert</option>
                             </select>
                         </div>
                     </div>

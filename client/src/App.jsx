@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import './App.css'
-import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import axios from 'axios'
 import LeadList from './components/LeadList';
+import DisplayLead from './components/DisplayLead';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
 function App() {
@@ -18,8 +19,13 @@ function App() {
   return (
 
     <>
-
-      <LeadList leads={leads} />
+      <Router>
+        <Routes>
+          <Route path="/" element={<LeadList leads={leads} />} />
+          <Route path="/leads/:id" element={<DisplayLead />} />
+        </Routes>
+      </Router>
+      {/* <LeadList leads={leads} /> */}
 
     </>
 
