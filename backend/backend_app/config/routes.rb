@@ -15,8 +15,7 @@
 # config/routes.rb
 # Rails.logger.info "Received request to create lead:" # Logs to server logs
 Rails.application.routes.draw do
-  Rails.logger.info "Loading routes.rb..."
-  puts "Loading routes.rb..."
+  # puts "Loading routes.rb..."
   resources :bookings
   resources :event_managers
   resources :events
