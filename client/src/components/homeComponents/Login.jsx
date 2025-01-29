@@ -16,13 +16,22 @@ const Login = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        axios.get('http://localhost:8000/api/users', user, {withCredentials:true})
+        console.log(user)
+        axios.post('http://localhost:3001/api/event_managers/login', 
+            {event_manager: {
+                email: user.email,
+                password: user.password,
+            }}
+            , {withCredentials:true, headers: {
+            "Content-Type": "application/json", // Ensure JSON is sent
+            "Accept": "application/json", // Expect JSON response
+        },})
             .then((res) => {
-
-                navigate('/homepage')
+                navigate("/lead/list")
             })
             .catch((err) => {
-                console.log(err);
+                console.error("Login failed:", err.response?.data?.error || err.message);
+                setErrors(err.response?.data?.error || "An error occurred.");
             })
     }
 
@@ -38,7 +47,6 @@ const Login = () => {
                 <input type="password" className="form-control" value={user.password} name='password' onChange={changeHandler}/>
             </div>
             <button className='btn btn-primary d-block'>Login</button>
-            <Link to={'/'}>Register here</Link>
         </form>
     </div>
   )

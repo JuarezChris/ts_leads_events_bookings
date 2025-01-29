@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css'
+import './assets/css/home.css'
 import axios from 'axios'
 import LeadList from './components/LeadList';
 import Home from './components/views/Home';

@@ -64,7 +64,6 @@ const Reg = () => {
                 <input type="password" className="form-control" value={user.confirmPassword} name='password_confirmation' onChange={changeHandler}/>
             </div>
             <button className='btn btn-primary d-block'>Register</button>
-            <Link to={'/login'}>Already Have An Account?</Link>
         </form>
     </div>
   )
