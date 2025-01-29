@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css'
 import axios from 'axios'
 import LeadList from './components/LeadList';
+import Home from './components/views/Home';
 import DisplayLead from './components/DisplayLead';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -21,12 +22,11 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<LeadList leads={leads} />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/lead/list" element={<LeadList leads={leads} />} />
           <Route path="/leads/:id" element={<DisplayLead />} />
         </Routes>
       </Router>
-      {/* <LeadList leads={leads} /> */}
-
     </>
 
   )

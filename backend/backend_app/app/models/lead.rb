@@ -5,5 +5,5 @@ class Lead < ApplicationRecord
     belongs_to :event_manager # A lead belongs to an event manager
     belongs_to :booking # The leads table has the foreign key 'booking_id'
     has_many :events # A booking has many events
-  end
+end
   

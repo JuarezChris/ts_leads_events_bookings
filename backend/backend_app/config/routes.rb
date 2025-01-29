@@ -16,10 +16,13 @@
 # Rails.logger.info "Received request to create lead:" # Logs to server logs
 Rails.application.routes.draw do
   # puts "Loading routes.rb..."
-  resources :bookings
-  resources :event_managers
-  resources :events
+  # resources :bookings
+  # resources :event_managers
+
   namespace :api do
     resources :leads, only: [:index, :show]
+    resources :event_managers, except: [:create]
+    post 'event_managers/register', to: 'event_managers#register' # Custom create route
+    post 'event_managers/login', to: 'event_managers#login'
   end
 end

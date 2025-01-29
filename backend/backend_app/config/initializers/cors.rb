@@ -17,9 +17,20 @@
 
 # config/initializers/cors.rb
 
+# Rails.application.config.middleware.insert_before 0, Rack::Cors do
+#     allow do
+#       origins 'http://localhost:5173'  # or your Vite dev server URL
+#       resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete]
+#     end
+#   end
+
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
     allow do
-      origins 'http://localhost:5173'  # or your Vite dev server URL
-      resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete]
+      origins 'http://localhost:5173' 
+      resource '*',
+        headers: :any,
+        methods: [:get, :post, :patch, :put, :delete, :options],
+        credentials: true # Allows cookies for session-based authentication
     end
   end
+  
