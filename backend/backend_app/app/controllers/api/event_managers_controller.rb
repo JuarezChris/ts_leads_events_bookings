@@ -27,15 +27,16 @@ class Api::EventManagersController < ApplicationController
     
     def login
         # puts "Here"
-        # puts "Received Parameters: #{params.inspect}"
-        # puts "#{event_manager_params}"
+        puts "Received Parameters: #{params.inspect}"
+        puts "#{event_manager_params}"
         @event_manager = EventManager.find_by_email(event_manager_params[:email])
-
+        puts @event_manager.inspect
         if @event_manager&.authenticate(event_manager_params[:password])
             session[:event_manager_id] = @event_manager.id # Store user ID in session
+            # puts "#{event_manager}"
             render json: { 
                 message: "Login successful", 
-                event_manager: { id: @event_manager.id, email: @event_manager.email } 
+                event_manager: { id: @event_manager.id, email: @event_manager.email, fname: @event_manager.fname, lname: @event_manager.lname } 
             }, status: :ok
             else
             render json: { error: "Invalid email or password" }, status: :unauthorized
@@ -48,15 +49,18 @@ class Api::EventManagersController < ApplicationController
         # end
     end
 
-    def logout
+    def destroy
         session[:event_manager_id] = nil # Clears session
         render json: { message: "Logged out successfully" }, status: :ok
     end
     
-    def check_login
+    def show
+        puts "Here"
+        puts "Please"
         if session[:event_manager_id]
-            event_manager = EventManager.find(session[:event_manager_id])
-            render json: { logged_in: true, event_manager: { id: event_manager.id, email: event_manager.email } }
+            @event_manager = EventManager.find(session[:event_manager_id])
+
+            render json: { logged_in: true, event_manager: { id: @event_manager.id, email: @event_manager.email, fname: @event_manager.fname, lname: @event_manager.lname } }
         else
             render json: { logged_in: false }
         end

@@ -1,13 +1,23 @@
 #root {
   height: 100%;
+  width: 100%;
+  min-width: 100vw;
   min-height: 100vh;
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
+/* .appMainContent{
+  margin: 0;
+  display: flex; 
+  place-items: center;
+  min-width: 100%;
+  min-height: 100vh;
+} */
 

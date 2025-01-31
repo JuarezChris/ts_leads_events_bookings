@@ -1,9 +1,11 @@
 import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useUserSession } from '../context/UserSessionContext';
 
 const Login = () => {
     const navigate = useNavigate()
+    const { setEventManagerSession } = useUserSession();
     const [user, setUser] = useState({
         email:'',
         password:'',
@@ -16,7 +18,7 @@ const Login = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log(user)
+        // console.log(user)
         axios.post('http://localhost:3001/api/event_managers/login', 
             {event_manager: {
                 email: user.email,
@@ -27,7 +29,10 @@ const Login = () => {
             "Accept": "application/json", // Expect JSON response
         },})
             .then((res) => {
-                navigate("/lead/list")
+                // console.log(res)
+                setEventManagerSession(res.data.event_manager)
+                // setUser(res.data.event_manager);
+                navigate("/dashboard")
             })
             .catch((err) => {
                 console.error("Login failed:", err.response?.data?.error || err.message);

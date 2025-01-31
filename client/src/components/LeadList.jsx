@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
-import '../assets/css/leadList.css'
+import React, { useState, useEffect } from 'react'
+import '../styles/css/leadList.css'
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const LeadList = ({ leads }) => {
-  const navigate = useNavigate();
+const LeadList = () => {
+    const [leads, setLeads] = useState([]);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/api/leads')
+        .then(response => setLeads(response.data))
+        .catch(err => console.error(err));
+    }, []);
 
   const handleLeadClick = (leadId) => {
-    navigate(`/leads/${leadId}`); 
+    navigate(`leads/${leadId}`); 
   };
     return (
         <div className='leadListMainContainer'>

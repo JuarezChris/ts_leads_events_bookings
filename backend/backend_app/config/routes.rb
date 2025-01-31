@@ -20,9 +20,16 @@ Rails.application.routes.draw do
   # resources :event_managers
 
   namespace :api do
-    resources :leads, only: [:index, :show]
+    resources :leads
     resources :event_managers, except: [:create]
+
+    post 'leads/create', to: 'leads#create' # Custom create route
     post 'event_managers/register', to: 'event_managers#register' # Custom create route
     post 'event_managers/login', to: 'event_managers#login'
+    delete 'event_managers/logout', to: 'event_managers#logout'
+
+    get 'event_managers/check_login', to: 'event_managers#show'
+    # AbstractController::ActionNotFound (The action 'show' could not be found for Api::EventManagersController):
+    # get 'event_managers/check_login', to: 'event_managers#check_login'
   end
 end

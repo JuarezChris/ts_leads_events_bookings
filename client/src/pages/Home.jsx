@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import Reg from '../homeComponents/Reg';
-import Login from '../homeComponents/Login';
+import Reg from '../components/Reg';
+import Login from '../components/Login';
+import '../styles/css/home.css'
 // import '../assets/css/home.css' // need to figure out why it's not working
 
 const Home = () => {
     const [showLogin, setShowLogin] = useState(false);
 
 return (
-    <div>
+    <div className='HomeMainContent'>
         { showLogin ? (
             <>
                 <Login />

@@ -1,9 +1,11 @@
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useUserSession } from '../context/UserSessionContext';
 
 const Reg = () => {
     const navigate = useNavigate()
+    const { setEventManagerSession } = useUserSession();
     const [user, setUser] = useState({
         fname:'',
         lname:'',
@@ -19,7 +21,6 @@ const Reg = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log(user)
         axios.post('http://localhost:3001/api/event_managers/register', 
             {event_manager: {
                 fname: user.fname,
